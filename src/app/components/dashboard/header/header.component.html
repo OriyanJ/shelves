@@ -1,0 +1,56 @@
+<div class="bg-primary">
+
+  <div class="container space-top-1 pb-3">
+    <div class="row">
+      <div class="col-lg-7 order-lg-1">
+        <!-- User Info -->
+        <div class="media d-block d-sm-flex align-items-sm-center">
+          <div class="media-body">
+            <h1 class="h3 text-white font-weight-medium mb-1">Howdy, {{ visitorName$ | async }}.</h1>
+          </div>
+        </div>
+        <!-- End User Info -->
+      </div>
+    </div>
+  </div>
+
+  <div class="container space-bottom-1 space-bottom-lg-0">
+    <div class="d-lg-flex justify-content-lg-between align-items-lg-center">
+
+      <!-- Navbar -->
+      <div class="u-header u-header-left-aligned-nav u-header--bg-transparent-lg u-header--white-nav-links z-index-4">
+        <div class="u-header__section bg-transparent">
+          <nav class="navbar navbar-expand-lg u-header__navbar u-header__navbar--no-space ">
+            <div>
+              <ul class="navbar-nav u-header__navbar-nav">
+                <!-- Search for books -->
+                <li class="nav-item hs-has-sub-menu u-header__nav-item" data-event="hover">
+                  <a class="nav-link u-header__nav-link" routerLink="/" routerLinkActive="text-white"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    Search for books
+                  </a>
+                </li>
+                <!-- /Search for books -->
+
+                <!-- Wishlist -->
+                <li class="nav-item hs-has-sub-menu u-header__nav-item" data-event="hover" data-animation-in="slideInUp"
+                  data-animation-out="fadeOut">
+                  <a class="nav-link u-header__nav-link d-flex align-items-center" routerLink="/wishlist"
+                    routerLinkActive="text-white">
+                    Wishlist <span class="badge badge-sm bg-soft-danger ml-1"
+                      *ngIf="wishlistCount$ | async as wishlistCount">
+                      {{ wishlistCount }}
+                    </span>
+                  </a>
+                </li>
+                <!-- /Wishlist -->
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!-- /Navbar -->
+
+    </div>
+  </div>
+</div>

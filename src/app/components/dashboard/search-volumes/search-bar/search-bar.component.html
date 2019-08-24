@@ -1,0 +1,24 @@
+<div class="bg-light">
+    <div class="container space-1">
+        <div class="row mx-gutters-2">
+            <div class="col-lg mb-3 mb-lg-0">
+                <!-- Search form -->
+                <form [formGroup]="searchForm">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control border-right-0" name="search-volume" id="search-volume"
+                            placeholder="Search for books" autocomplete="off" formControlName="query">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <span class="fas fa-search" *ngIf="!progress; else showProgress"></span>
+                                <ng-template #showProgress>
+                                    <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
+                                </ng-template>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+                <!-- Search form -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<!-- Page Preloader -->
+<div class="page-preloader page-preloader-transparent" *ngIf="progress">
+  <div class="page-preloader__content-centered">
+    <div class="spinner-border text-primary" role="status">
+    </div>
+  </div>
+</div>
+<!-- End Page Preloader -->
+
+<!-- Search bar -->
+<app-search-bar (queryChanged)="onQueryChange($event)"></app-search-bar>
+<!-- /Search bar -->
+
+<div class="container mt-5">
+  <pagination [totalItems]="totalResults" [itemsPerPage]="20" [(ngModel)]="page" [boundaryLinks]="false"
+    [rotate]="false" [maxSize]="3" (pageChanged)="onPageChange($event)" *ngIf="volumeResults">
+  </pagination>
+
+  <div class="row" *ngIf="volumeResults">
+    <div class="col-md-6 col-xl-4 mb-4" *ngFor="let volume of volumeResults">
+      <app-volume-item-result [volume]="volume"></app-volume-item-result>
+    </div>
+  </div>
+</div>

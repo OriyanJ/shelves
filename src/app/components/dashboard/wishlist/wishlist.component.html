@@ -1,0 +1,13 @@
+<div class="container mt-4">
+  <ng-container *ngIf="wishlist$ | async as wishlist">
+    <ng-container *ngIf="wishlist.length; else noBooks">
+      <div class="mb-4" *ngFor="let volume of wishlist">
+        <app-volume-item [volume]="volume" [isWishlistItem]="true"></app-volume-item>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #noBooks>
+    You don't have any books on your wishlist.
+  </ng-template>
+</div>

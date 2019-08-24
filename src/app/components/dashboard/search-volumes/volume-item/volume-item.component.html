@@ -1,0 +1,77 @@
+<div class="card shadow">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm-3 book-cover mb-4">
+        <img class="w-100 rounded" [src]="volume.volumeInfo.imageLinks.thumbnail"
+          [alt]="'Book cover of ' + volume.volumeInfo.title" *ngIf="volume.volumeInfo.imageLinks">
+      </div>
+
+      <div class="col-sm-9">
+        <div class="h5">{{ volume.volumeInfo.title }}</div>
+
+        <!-- Authors -->
+        <div class="fs--1 mt-3">
+          <div class="font-weight-semi-bold">Written by</div>
+          <ng-container *ngIf="volume.volumeInfo.authors; else notKnown">
+            {{ volume.volumeInfo.authors.join(', ') }}
+          </ng-container>
+        </div>
+        <!-- /Authors -->
+
+        <!-- Categories -->
+        <div class="fs--1 mt-3">
+          <div class="font-weight-semi-bold">Categories</div>
+          <ng-container *ngIf="volume.volumeInfo.categories; else notKnown">
+            {{ volume.volumeInfo.categories.join(', ') }}
+          </ng-container>
+        </div>
+        <!-- /Categories -->
+
+        <!-- Publisher -->
+        <div class="fs--1 mt-3">
+          <div class="font-weight-semi-bold">Publisher</div>
+          <ng-container *ngIf="volume.volumeInfo.publisher; else notKnown">
+            {{ volume.volumeInfo.publisher }}
+          </ng-container>
+        </div>
+        <!-- /Publisher -->
+
+        <!-- Publish year -->
+        <div class="fs--1 mt-3">
+          <div class="font-weight-semi-bold">Publish year</div>
+          <ng-container *ngIf="volume.volumeInfo.publishedDate; else notKnown">
+            {{ volume.volumeInfo.publishedDate.length === 4 ? volume.volumeInfo.publishedDate : (volume.volumeInfo.publishedDate|date:'y') }}<br>
+          </ng-container>
+        </div>
+        <!-- /Publish year -->
+
+        <!-- Description -->
+        <div class="fs--1 mt-3">
+          <div class="font-weight-semi-bold">Description</div>
+          <p *ngIf="volume.volumeInfo.description; else notKnown">
+            {{ volume.volumeInfo.description | truncate:500:true }}
+          </p>
+        </div>
+        <!-- /Description -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-sm btn-soft-primary" type="submit" (click)="toggleWishlist()">
+      <ng-container *ngIf="!isInWishlist; else removeFromWishlist">
+        Add to wishlist <span class="fas fa-heart-o ml-1"></span>
+      </ng-container>
+      <ng-template #removeFromWishlist>
+        Remove from wishlist <span class="fas fa-heart ml-1"></span>
+      </ng-template>
+    </button>
+    <button class="btn btn-sm btn-soft-secondary" type="submit" (click)="bsModalRef.hide()"
+      *ngIf="!isWishlistItem">Close</button>
+
+  </div>
+</div>
+
+<ng-template #notKnown>
+  <span class="text-muted">Not known.</span>
+</ng-template>
