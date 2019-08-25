@@ -56,7 +56,6 @@ export class SearchVolumesComponent implements OnInit, OnDestroy {
       .subscribe((results: VolumesPaginated) => {
         this.totalResults = results.totalItems;
         this.volumeResults = results.items ? results.items : [];
-        console.log(this.volumeResults);
       });
   }
 
