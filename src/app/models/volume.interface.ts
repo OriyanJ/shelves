@@ -14,6 +14,7 @@ export interface VolumeInfo {
   canonicalVolumeLink?: string;
   categories?: string[];
   contentVersion?: string;
+  description?: string;
   imageLinks?: { smallThumbnail: string; thumbnail: string };
   industryIdentifiers?: [];
   infoLink?: string;
