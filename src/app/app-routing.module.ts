@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, NotAuthGuard } from '@guards';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
     path: '',
     loadChildren: './components/dashboard/dashboard.module#DashboardModule',
     canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
 ];
 

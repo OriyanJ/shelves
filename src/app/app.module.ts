@@ -9,9 +9,10 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ProgressInterceptor } from './interceptors/progress.interceptor';
 import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, WelcomeComponent, ProgressSpinnerComponent],
+  declarations: [AppComponent, WelcomeComponent, ProgressSpinnerComponent, PageNotFoundComponent],
   imports: [
     ModalModule.forRoot(),
     FormsModule,
