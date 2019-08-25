@@ -11,18 +11,18 @@ import { VolumeItemComponent } from '../volume-item/volume-item.component';
 export class VolumeItemResultComponent implements OnInit {
   @Input() volume: Volume;
   bsModalRef: BsModalRef;
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   showVolumeDetails() {
     const initialState = {
       volume: this.volume
     };
 
-    this.bsModalRef = this.modalService.show(VolumeItemComponent, { initialState });
+    this.bsModalRef = this.modalService.show(VolumeItemComponent, {
+      initialState
+    });
     this.bsModalRef.setClass('modal-lg');
   }
-
 }

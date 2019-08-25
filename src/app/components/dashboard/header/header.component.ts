@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WishlistService, VisitorService } from '@services';
+import { VisitorService, WishlistService } from '@services';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,13 +11,15 @@ import { map } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   visitorName$: Observable<string> = new Observable();
   wishlistCount$: Observable<number> = new Observable();
-  constructor(private wishlistService: WishlistService, private visitorService: VisitorService) { }
+  constructor(
+    private wishlistService: WishlistService,
+    private visitorService: VisitorService
+  ) {}
 
   ngOnInit() {
     this.visitorName$ = this.visitorService.name;
     this.wishlistCount$ = this.wishlistService.wishlist.pipe(
-      map(wishlist => (wishlist ? Object.keys(wishlist).length : 0)),
-    )
+      map(wishlist => (wishlist ? Object.keys(wishlist).length : 0))
+    );
   }
-
 }

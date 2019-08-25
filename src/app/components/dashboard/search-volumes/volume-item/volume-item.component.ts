@@ -14,10 +14,15 @@ export class VolumeItemComponent implements OnInit {
 
   isInWishlist: boolean;
 
-  constructor(public bsModalRef: BsModalRef, private wishlistService: WishlistService) { }
+  constructor(
+    public bsModalRef: BsModalRef,
+    private wishlistService: WishlistService
+  ) {}
 
   ngOnInit() {
-    this.isInWishlist = this.isWishlistItem ? true : this.wishlistService.isInWishlist(this.volume.id);
+    this.isInWishlist = this.isWishlistItem
+      ? true
+      : this.wishlistService.isInWishlist(this.volume.id);
   }
 
   toggleWishlist() {
@@ -29,5 +34,4 @@ export class VolumeItemComponent implements OnInit {
     this.wishlistService.add(this.volume);
     this.isInWishlist = true;
   }
-
 }

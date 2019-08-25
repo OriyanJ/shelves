@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { VisitorService } from '@services';
 
 @Component({
@@ -9,16 +14,13 @@ import { VisitorService } from '@services';
 })
 export class WelcomeComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(
-    private fb: FormBuilder,
-    private visitorService: VisitorService
-  ) {
+  constructor(private fb: FormBuilder, private visitorService: VisitorService) {
     this.loginForm = this.fb.group({
       name: [null, [Validators.required, this.noWhitespaceValidator]]
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   onFormSubmit() {
     if (this.loginForm.invalid) {
@@ -35,6 +37,6 @@ export class WelcomeComponent implements OnInit {
   noWhitespaceValidator(control: FormControl) {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
-    return isValid ? null : { 'whitespace': true };
+    return isValid ? null : { whitespace: true };
   }
 }

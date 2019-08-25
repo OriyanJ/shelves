@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BookService } from 'src/app/services/book.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Volume, VolumesPaginated } from '@models';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { BookService } from 'src/app/services/book.service';
 import { VisitorService } from 'src/app/services/visitor.service';
-import { VolumesPaginated, Volume } from '@models';
 
 interface Pagination {
   page: number;
@@ -24,11 +24,14 @@ export class SearchVolumesComponent implements OnInit, OnDestroy {
   currentQuery: string;
   progress: boolean;
 
-  constructor(private bookService: BookService, private visitorService: VisitorService) {
+  constructor(
+    private bookService: BookService,
+    private visitorService: VisitorService
+  ) {
     this.initVisitorInto();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.unsubscribe$.next();
@@ -49,17 +52,16 @@ export class SearchVolumesComponent implements OnInit, OnDestroy {
   searchBooks(): void {
     this.progress = true;
     const index = this.getStartingIndex();
-    this.bookService.searchVolumes(this.currentQuery, index).pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(
-      (results: VolumesPaginated) => {
+    this.bookService
+      .searchVolumes(this.currentQuery, index)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((results: VolumesPaginated) => {
         this.totalResults = results.totalItems;
         console.log(this.totalResults);
 
         this.volumeResults = results.items;
         this.progress = false;
-      }
-    );
+      });
   }
 
   /**
@@ -74,7 +76,6 @@ export class SearchVolumesComponent implements OnInit, OnDestroy {
 
   /**
    * Handle a change in page by searching for books.
-   * @param pagination 
    */
   onPageChange(pagination: Pagination): void {
     this.page = pagination.page;
@@ -87,5 +88,4 @@ export class SearchVolumesComponent implements OnInit, OnDestroy {
   getStartingIndex(): number {
     return this.page === 1 ? 0 : (this.page - 1) * 20;
   }
-
 }

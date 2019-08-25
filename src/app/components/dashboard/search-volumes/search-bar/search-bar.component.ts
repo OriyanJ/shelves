@@ -1,12 +1,18 @@
-import { Component, OnInit, Input, Output, OnDestroy, EventEmitter } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import {
   debounceTime,
-  takeUntil,
+  distinctUntilChanged,
   filter,
-  tap,
-  distinctUntilChanged
+  takeUntil,
+  tap
 } from 'rxjs/operators';
 
 @Component({
@@ -15,13 +21,12 @@ import {
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
-  @Input() formControlName: string;
   @Output() queryChanged: EventEmitter<string> = new EventEmitter();
 
   private unsubscribe$ = new Subject<void>();
   progress: boolean;
-
   searchForm: FormGroup;
+
   constructor(private fb: FormBuilder) {
     this.searchForm = this.fb.group({
       query: null
@@ -29,8 +34,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     this.setSearchSubscirption();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.unsubscribe$.next();
@@ -38,17 +42,17 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   setSearchSubscirption() {
-
-    this.searchForm.valueChanges.pipe(
-      tap(() => this.progress = true),
-      debounceTime(700),
-      distinctUntilChanged(),
-      filter((data) => !!data.query),
-      tap(() => this.progress = false),
-      takeUntil(this.unsubscribe$)
-    ).subscribe((value: { query: string }) => {
-      this.queryChanged.emit(value.query);
-    });
+    this.searchForm.valueChanges
+      .pipe(
+        tap(() => (this.progress = true)),
+        debounceTime(700),
+        distinctUntilChanged(),
+        filter(data => !!data.query),
+        tap(() => (this.progress = false)),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((value: { query: string }) => {
+        this.queryChanged.emit(value.query);
+      });
   }
-
 }
