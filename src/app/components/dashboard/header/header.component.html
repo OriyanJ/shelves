@@ -1,4 +1,4 @@
-<div class="bg-primary">
+<div class="gradient-half-primary-v1">
 
   <div class="container space-top-1 pb-3">
     <div class="row">
@@ -19,8 +19,8 @@
 
       <!-- Navbar -->
       <div class="u-header u-header-left-aligned-nav u-header--bg-transparent-lg u-header--white-nav-links z-index-4">
-        <div class="u-header__section bg-transparent">
-          <nav class="navbar navbar-expand-lg u-header__navbar u-header__navbar--no-space ">
+        <div class="u-header__section bg-transparent shadow-none">
+          <nav class="navbar navbar-expand-lg u-header__navbar u-header__navbar--no-space">
             <div>
               <ul class="navbar-nav u-header__navbar-nav">
                 <!-- Search for books -->
@@ -37,7 +37,7 @@
                   data-animation-out="fadeOut">
                   <a class="nav-link u-header__nav-link d-flex align-items-center" routerLink="/wishlist"
                     routerLinkActive="text-white">
-                    Wishlist <span class="badge badge-sm bg-soft-danger ml-1"
+                    Wishlist <span class="badge badge-sm bg-primary ml-1"
                       *ngIf="wishlistCount$ | async as wishlistCount">
                       {{ wishlistCount }}
                     </span>

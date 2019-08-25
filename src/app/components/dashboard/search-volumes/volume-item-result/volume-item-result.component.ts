@@ -15,11 +15,13 @@ export class VolumeItemResultComponent implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Show a modal with book's extended details.
+   */
   showVolumeDetails() {
     const initialState = {
       volume: this.volume
     };
-
     this.bsModalRef = this.modalService.show(VolumeItemComponent, {
       initialState
     });

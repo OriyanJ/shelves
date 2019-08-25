@@ -22,7 +22,6 @@ export class SearchVolumesComponent implements OnInit, OnDestroy {
   page = 1;
   totalResults: number;
   currentQuery: string;
-  progress: boolean;
 
   constructor(
     private bookService: BookService,
@@ -50,17 +49,14 @@ export class SearchVolumesComponent implements OnInit, OnDestroy {
    * @param query Query to search books by.
    */
   searchBooks(): void {
-    this.progress = true;
     const index = this.getStartingIndex();
     this.bookService
       .searchVolumes(this.currentQuery, index)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((results: VolumesPaginated) => {
         this.totalResults = results.totalItems;
-        console.log(this.totalResults);
-
-        this.volumeResults = results.items;
-        this.progress = false;
+        this.volumeResults = results.items ? results.items : [];
+        console.log(this.volumeResults);
       });
   }
 
@@ -69,7 +65,12 @@ export class SearchVolumesComponent implements OnInit, OnDestroy {
    * @param query Query to search books by.
    */
   onQueryChange(query: string): void {
-    this.currentQuery = query;
+    // Don't make a search of the query hasn't changed.
+    if (this.currentQuery === query.trim()) {
+      return;
+    }
+    this.currentQuery = query.trim();
+
     this.page = 1; // When changing query, always reset the starting index.
     this.searchBooks();
   }

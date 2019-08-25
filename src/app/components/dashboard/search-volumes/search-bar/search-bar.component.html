@@ -1,12 +1,17 @@
 <div class="bg-light">
   <div class="container space-1">
+
+    <h1 class="h4">Search for books</h1>
+
     <div class="row mx-gutters-2">
       <div class="col-lg mb-3 mb-lg-0">
         <!-- Search form -->
         <form [formGroup]="searchForm">
+          <small class="form-text text-muted mb-2">Search within Google Books™ service.</small>
+          <!-- Search input -->
           <div class="input-group input-group-sm">
             <input type="text" class="form-control border-right-0" name="search-volume" id="search-volume"
-              placeholder="Search for books" autocomplete="off" formControlName="query">
+              autocomplete="off" formControlName="query">
             <div class="input-group-append">
               <span class="input-group-text">
                 <span class="fas fa-search" *ngIf="!progress; else showProgress"></span>
@@ -16,6 +21,7 @@
               </span>
             </div>
           </div>
+          <!-- /Search input -->
         </form>
         <!-- Search form -->
       </div>

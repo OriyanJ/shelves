@@ -1,13 +1,24 @@
 <div class="card shadow">
   <div class="modal-body">
     <div class="row">
+      <!-- Book cover -->
       <div class="col-sm-3 book-cover mb-4">
         <img class="w-100 rounded" [src]="volume.volumeInfo.imageLinks.thumbnail"
-          [alt]="'Book cover of ' + volume.volumeInfo.title" *ngIf="volume.volumeInfo.imageLinks">
+          [alt]="'Book cover of ' + volume.volumeInfo.title" *ngIf="volume.volumeInfo.imageLinks; else noBookCover">
+        <ng-template #noBookCover>
+          <div class="h-100 w-100 bg-light rounded d-flex" title="Book cover is missing">
+            <span class="fas fa-image text-black-50 m-auto font-size-4"></span>
+          </div>
+        </ng-template>
       </div>
+      <!-- /Book cover -->
 
+      <!-- Book info -->
       <div class="col-sm-9">
         <div class="h5">{{ volume.volumeInfo.title }}</div>
+        <a class="fs--1" [href]="volume.volumeInfo.previewLink" target="_blank" rel="noopener noreferrer"
+          *ngIf="volume.volumeInfo.previewLink">Google book
+          preview</a>
 
         <!-- Authors -->
         <div class="fs--1 mt-3">
@@ -54,6 +65,7 @@
         </div>
         <!-- /Description -->
       </div>
+      <!-- /Book info -->
     </div>
   </div>
 
@@ -68,7 +80,6 @@
     </button>
     <button class="btn btn-sm btn-soft-secondary" type="submit" (click)="bsModalRef.hide()"
       *ngIf="!isWishlistItem">Close</button>
-
   </div>
 </div>
 

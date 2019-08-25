@@ -3,11 +3,20 @@
   <div class="card-body">
 
     <div class="row">
+      <!-- Book cover -->
       <div class="col-3">
         <img class="w-100 rounded cursor-pointer" [src]="volume.volumeInfo.imageLinks.smallThumbnail"
           [alt]="'Book cover of ' + volume.volumeInfo.title" (click)="showVolumeDetails()"
-          *ngIf="volume.volumeInfo.imageLinks">
+          *ngIf="volume.volumeInfo.imageLinks; else noBookCover">
+        <ng-template #noBookCover>
+          <div class="h-100 w-100 d-flex" title="Book cover is missing">
+            <span class="fas fa-image text-black-50 m-auto font-size-2"></span>
+          </div>
+        </ng-template>
       </div>
+      <!-- /Book cover -->
+
+      <!-- Book info -->
       <div class="col-9">
         <div class="h6">
           <span class="cursor-pointer" (click)="showVolumeDetails()">{{ volume.volumeInfo.title | truncate:50 }}</span>
@@ -15,8 +24,7 @@
         <!-- Authors -->
         <div class="fs--1" *ngIf="volume.volumeInfo.authors">
           <span class="text-muted">by</span>
-          {{ volume.volumeInfo.authors.join(', ') }}
-          <!-- <span *ngFor="let author of volume.volumeInfo.authors">{{ author }}</span> -->
+          {{ volume.volumeInfo.authors.join(', ') | truncate:50 }}
         </div>
         <!-- /Authors -->
         <!-- Categories -->
@@ -26,8 +34,8 @@
         </div>
         <!-- /Categories -->
 
-        <!-- <button class="btn btn-xs btn-soft-primary mr-1">Book details</button> -->
       </div>
+      <!-- /Book info -->
     </div>
   </div>
 </div>

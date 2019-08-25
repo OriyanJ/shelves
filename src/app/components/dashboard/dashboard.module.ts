@@ -13,6 +13,7 @@ import { SearchVolumesComponent } from './search-volumes/search-volumes.componen
 import { VolumeItemResultComponent } from './search-volumes/volume-item-result/volume-item-result.component';
 import { VolumeItemComponent } from './search-volumes/volume-item/volume-item.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { FooterComponent } from './footer/footer.component';
 
 const routes = [
   {
@@ -34,7 +35,8 @@ const routes = [
     WishlistComponent,
     HeaderComponent,
     SearchBarComponent,
-    TruncatePipe
+    TruncatePipe,
+    FooterComponent
   ],
   imports: [
     RouterModule.forChild(routes),

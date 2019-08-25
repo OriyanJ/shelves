@@ -1,3 +1,9 @@
+<div class="bg-light">
+  <div class="container py-5">
+    <h1 class="h4 mb-0">Wishlist</h1>
+  </div>
+</div>
+
 <div class="container mt-4">
   <ng-container *ngIf="wishlist$ | async as wishlist">
     <ng-container *ngIf="wishlist.length; else noBooks">
