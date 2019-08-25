@@ -1,12 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
 import { Volume } from '@models';
-import { BsModalRef } from 'ngx-bootstrap/modal';
 import { WishlistService } from '@services';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-volume-item',
   templateUrl: './volume-item.component.html',
-  styleUrls: ['./volume-item.component.scss']
+  styleUrls: ['./volume-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VolumeItemComponent implements OnInit {
   @Input() volume: Volume;

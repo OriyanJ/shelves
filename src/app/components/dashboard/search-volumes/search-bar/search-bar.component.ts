@@ -3,23 +3,19 @@ import {
   EventEmitter,
   OnDestroy,
   OnInit,
-  Output
+  Output,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProgressService } from '@services';
 import { Subject } from 'rxjs';
-import {
-  debounceTime,
-  filter,
-  takeUntil,
-  tap,
-  distinctUntilChanged
-} from 'rxjs/operators';
+import { debounceTime, filter, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss']
+  styleUrls: ['./search-bar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
   @Output() queryChanged: EventEmitter<string> = new EventEmitter();
