@@ -65,7 +65,7 @@ export class SearchVolumesComponent implements OnInit, OnDestroy {
    */
   onQueryChange(query: string): void {
     // Don't make a search of the query hasn't changed.
-    if (this.currentQuery === query.trim()) {
+    if (this.currentQuery === query.trim() && this.volumeResults.length) {
       return;
     }
     this.currentQuery = query.trim();
